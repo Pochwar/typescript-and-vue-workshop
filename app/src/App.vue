@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <TheNavbar />
+  <TheNavbar tagline="Tag Eul"/>
   <RouterView />
   <TheFooter />
 </template>
