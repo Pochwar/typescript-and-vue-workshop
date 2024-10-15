@@ -1,17 +1,19 @@
-<script>
+<script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
+import type { Restaurant } from '@/types';
+import { ref, defineEmits } from 'vue';
+import { restaurantStatusList } from '@/constants';
 
-export default {
-  emits: ['add-new-restaurant', 'cancel-new-restaurant'],
-  data: () => ({
-    newRestaurant: {
-      id: uuidv4(),
-      name: '',
-      address: '',
-      website: '',
-      status: 'Want to Try',
-    },
-  }),
+const newRestaurant = ref<Restaurant>({
+  id: uuidv4(),
+  name: '',
+  address: '',
+  website: '',
+  status: 'Want to Try',
+})
+const emits = defineEmits(['add-new-restaurant', 'cancel-new-restaurant'])
+const updateName = () => {
+
 }
 </script>
 
