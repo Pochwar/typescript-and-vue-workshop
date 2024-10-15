@@ -54,6 +54,10 @@ const deleteRestaurant = (payload: Restaurant): void => {
   })
 };
 
+const updateFilterText = (e: InputEvent) => {
+  filterText.value = e.target.value;
+}
+
 // New form
 const showNewForm = ref(false);
 const hideForm = (): void => {
@@ -93,10 +97,12 @@ onMounted(() => {
             <div class="level-item is-hidden-tablet-only">
               <div class="field has-addons">
                 <p class="control">
-                  <input class="input" type="text" placeholder="Restaurant name" v-model="filterText" />
+                  <input class="input" type="text" placeholder="Restaurant name" :value="filterText"
+                   @keyup.enter="updateFilterText"
+                  />
                 </p>
                 <p class="control">
-                  <button class="button">Search</button>
+                  <button class="button" @click="updateFilterText">Search</button>
                 </p>
               </div>
             </div>

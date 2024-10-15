@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
 import type { Restaurant } from '@/types';
-import { ref, defineEmits } from 'vue';
+import { ref, onMounted } from 'vue';
 import { restaurantStatusList } from '@/constants';
 
 const newRestaurant = ref<Restaurant>({
@@ -10,11 +10,28 @@ const newRestaurant = ref<Restaurant>({
   address: '',
   website: '',
   status: 'Want to Try',
-})
-const emits = defineEmits(['add-new-restaurant', 'cancel-new-restaurant'])
-const updateName = () => {
+});
 
+const emits = defineEmits<{
+  (e:'add-new-restaurant', newRestaurant: Restaurant): void,
+  (e:'cancel-new-restaurant'): void
+}>();
+
+const updateName = (e: InputEvent) => {
+  newRestaurant.value.name = e.target.value;
 }
+const addRestaurant = () => {
+  emits('add-new-restaurant', newRestaurant.value)
+}
+const cancelRestaurant = () => {
+  emits('cancel-new-restaurant')
+}
+
+const elNameInput = ref<HTMLInputElement | null>(null);
+
+onMounted(() => {
+  elNameInput.value?.focus();
+})
 </script>
 
 <template>
@@ -25,7 +42,7 @@ const updateName = () => {
         <div class="control">
           <input
             :value="newRestaurant.name"
-            @keyup.space="updateName"
+            @input="updateName"
             type="text"
             class="input is-large"
             placeholder="Beignet and the Jets"
@@ -52,8 +69,8 @@ const updateName = () => {
       </div>
       <div class="field">
         <div class="buttons">
-          <button @click="$emit('add-new-restaurant', newRestaurant)" class="button is-success">Create</button>
-          <button @click="$emit('cancel-new-restaurant')" class="button is-light">Cancel</button>
+          <button @click="addRestaurant" class="button is-success">Create</button>
+          <button @click="cancelRestaurant" class="button is-light">Cancel</button>
         </div>
       </div>
     </div>
