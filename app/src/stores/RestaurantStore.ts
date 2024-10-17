@@ -42,6 +42,12 @@ export const useRestaurantStore = defineStore('RestaurantStore', {
       this.list = this.list.filter((restaurant: Restaurant) => {
         return restaurant.id !== payload.id
       })
+    },
+    editRestaurant(payload: Restaurant) {
+      const index = this.list.findIndex((restaurant: Restaurant) => restaurant.id === payload.id);
+      if (index!== -1) {
+        this.list.splice(index, 1, payload);
+      }
     }
   }
 })

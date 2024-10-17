@@ -32,6 +32,12 @@ export const useDishStore = defineStore('DishStore', {
             this.list = this.list.filter((dish) => {
                 return dish.id !== payload.id;
             });
+        },
+        editDish(payload) {
+            const index = this.list.findIndex((dish) => dish.id === payload.id);
+            if (index !== -1) {
+                this.list.splice(index, 1, payload);
+            }
         }
     }
 });

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import EditRestaurantForm from '@/components/EditRestaurantForm.vue';
+import { computed, ref } from 'vue';
 import type  { Restaurant } from '@/types';
 
 type PropTypes = {
@@ -28,11 +29,13 @@ const statusColor = computed(() => {
 const deleteRestaurant = () => {
   emits('delete-restaurant', props.restaurant)
 }
+
+const showEditRestaurantForm = ref<boolean>(false);
 </script>
 
 <template>
   <article class="box">
-    <div class="media">
+    <div v-if="!showEditRestaurantForm" class="media">
       <aside class="media-left">
         <img src="https://placehold.jp/150x150.png" alt="" />
       </aside>
@@ -47,10 +50,16 @@ const deleteRestaurant = () => {
           {{ restaurant.address }}
         </div>
         <div>
+          <button @click="showEditRestaurantForm = true" class="button is-small is-info is-light">Edit</button>
           <button @click="deleteRestaurant" class="button is-small is-danger is-light">Delete</button>
         </div>
       </div>
     </div>
+    <EditRestaurantForm
+      v-else
+      :restaurant="props.restaurant"
+      @close-form="showEditRestaurantForm = false"
+    />
   </article>
 </template>
 

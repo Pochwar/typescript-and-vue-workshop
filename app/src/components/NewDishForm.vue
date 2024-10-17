@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Dish } from '@/types';
 

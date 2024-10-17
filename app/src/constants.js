@@ -3,6 +3,7 @@ export const restaurantStatusList = [
     'Recommended',
     'Do Not Recommend'
 ];
+export const dishStatusList = restaurantStatusList;
 export const dietList = [
     'Vegetarian', 'Pescetarian', 'Keto', ''
 ];
