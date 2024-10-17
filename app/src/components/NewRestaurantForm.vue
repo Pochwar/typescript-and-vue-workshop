@@ -17,8 +17,8 @@ const emits = defineEmits<{
   (e:'cancel-new-restaurant'): void
 }>();
 
-const updateName = (e: InputEvent) => {
-  newRestaurant.value.name = e.target.value;
+const updateName = (payload: Event) => {
+  newRestaurant.value.name = (payload.target as HTMLInputElement).value;
 }
 const addRestaurant = () => {
   emits('add-new-restaurant', newRestaurant.value)
